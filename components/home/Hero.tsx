@@ -5,12 +5,14 @@ import { Loader2 } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from "react";
 import { API_CONFIG } from "@/lib/api-config";
+import { ImageResizeModal } from "@/components/modal/ImageResizeModal";
 
 export default function Hero() {
 
   const [prompt, setPrompt] = useState<string>("");
   const [image, setImage] = useState<string>("");
   const [loading, setLoading] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   
 
@@ -41,6 +43,13 @@ export default function Hero() {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      handleImageGeneration();
+    }
+}
+
 
   return (
     <div className="w-[95%] min-h-screen mx-auto relative mt-[20vh]">
@@ -55,6 +64,7 @@ export default function Hero() {
                   className="w-full h-full outline-none rounded-lg text-black block flex-1 placeholder:text-xs sm:placeholder:text-base"
                   value={prompt}
                   onChange={(e) => setPrompt(e.target.value)}
+                  onKeyDown={handleKeyDown}
               />
               <Button className="cursor-pointer" onClick={handleImageGeneration}>Generate</Button>
             </div>
@@ -76,9 +86,21 @@ export default function Hero() {
               </div>
             )}
             {!loading && image && (
-              <div className="w-4/6 h-auto bg-white rounded-lg my-12">
+              <div 
+                className="w-3/6 h-auto bg-white rounded-lg my-12 cursor-pointer hover:opacity-90 transition-opacity"
+                onClick={() => setIsModalOpen(true)}
+              >
                 {image && <Image src={image} width={500} height={500} alt="Generated Image" className="w-full h-auto object-cover" />}
               </div>
+            )}
+
+            {/* Image Resize Modal */}
+            {image && (
+              <ImageResizeModal
+                isOpen={isModalOpen}
+                onClose={() => setIsModalOpen(false)}
+                imageUrl={image}
+              />
             )}
         </div>
     </div>
