@@ -5,6 +5,8 @@ const nextConfig: NextConfig = {
   images: {
     domains: ['storage.googleapis.com'],
   },
+  transpilePackages: ['@pqina/pintura', '@pqina/react-pintura'],
 };
+
 
 export default nextConfig;

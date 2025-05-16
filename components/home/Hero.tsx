@@ -52,7 +52,7 @@ export default function Hero() {
 
 
   return (
-    <div className="w-[95%] min-h-screen mx-auto relative mt-[20vh]">
+    <div className="w-[95%] min-h-screen mx-auto relative mt-[10vh]">
         <div className="relative z-10 text-white flex flex-col items-center justify-center">
             <h1 className="text-2xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-center bg-gradient-to-r from-orange-300 to-cyan-500 text-transparent bg-clip-text">
                 Create Beautiful Images with AI<br />Artificial Intelligence

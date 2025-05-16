@@ -1,6 +1,9 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useState } from "react";
 import Image from "next/image";
+import pintura from '@pqina/pintura/pintura.module.css';
+import pinturaTheme from './index.module.css';
+import { PinturaEditor } from '@pqina/react-pintura';
 
 interface ImageResizeModalProps {
   isOpen: boolean;
@@ -11,13 +14,14 @@ interface ImageResizeModalProps {
 export function ImageResizeModal({ isOpen, onClose, imageUrl }: ImageResizeModalProps) {
   const [width, setWidth] = useState<number>(500);
   const [height, setHeight] = useState<number>(500);
-
-  return (
+ 
+  return (    
     <Dialog open={isOpen} onOpenChange={onClose}>      
       <DialogContent className="sm:max-w-[800px] bg-black">
+        <PinturaEditor className={`${pintura} ${pinturaTheme}`} />
         <DialogHeader>
           <DialogTitle>Resize Image</DialogTitle>
-        </DialogHeader>
+        </DialogHeader>       
         <div className="flex flex-col gap-4">
           <div className="relative w-full h-[400px]">
             <Image
